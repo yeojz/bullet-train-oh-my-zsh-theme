@@ -169,6 +169,17 @@ or don't want to see. All options must be overridden in your **.zshrc** file.
 |`BULLETTRAIN_DIR_FG`|`white`|Foreground color
 |`BULLETTRAIN_DIR_EXTENDED`|`true`|Show user and machine in an SCP formatted style.
 
+
+### NPM Package Name
+
+|Variable|Default|Meaning
+|--------|-------|-------|
+|`BULLETTRAIN_NPM_PKG_SHOW`|`false`|Show/hide that segment
+|`BULLETTRAIN_NPM_PKG_BG`|`green`|Background color
+|`BULLETTRAIN_NPM_PKG_FG`|`white`|Foreground color
+|`BULLETTRAIN_NPM_PKG_PREFIX`|`""`|Prefix of the segment
+|`BULLETTRAIN_NPM_PKG_PREFIX`|`" ▷"`|Postfix of the segment
+
 ### Git
 
 |Variable|Default|Meaning

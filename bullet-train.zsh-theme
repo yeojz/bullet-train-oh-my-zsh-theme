@@ -79,6 +79,26 @@ if [ ! -n "${BULLETTRAIN_NVM_PREFIX+1}" ]; then
   BULLETTRAIN_NVM_PREFIX="⬡ "
 fi
 
+
+# NPM PKG
+if [ ! -n "${BULLETTRAIN_NPM_PKG_SHOW+1}" ]; then
+  BULLETTRAIN_NPM_PKG_SHOW=true
+fi
+if [ ! -n "${BULLETTRAIN_NPM_PKG_BG+1}" ]; then
+  BULLETTRAIN_NPM_PKG_BG=green
+fi
+if [ ! -n "${BULLETTRAIN_NPM_PKG_FG+1}" ]; then
+  BULLETTRAIN_NPM_PKG_FG=black
+fi
+if [ ! -n "${BULLETTRAIN_NPM_PKG_PREFIX+1}" ]; then
+  BULLETTRAIN_NPM_PKG_PREFIX=""
+fi
+if [ ! -n "${BULLETTRAIN_NPM_PKG_POSTFIX+1}" ]; then
+  BULLETTRAIN_NPM_PKG_POSTFIX=" ▷"
+fi
+
+
+
 # RMV
 if [ ! -n "${BULLETTRAIN_RVM_SHOW+1}" ]; then
   BULLETTRAIN_RVM_SHOW=true
@@ -364,6 +384,22 @@ prompt_nvm() {
   prompt_segment $BULLETTRAIN_NVM_BG $BULLETTRAIN_NVM_FG $BULLETTRAIN_NVM_PREFIX$nvm_prompt
 }
 
+
+# NPM: Package Name
+prompt_npm_pkg() {
+
+  if [[ $BULLETTRAIN_NPM_PKG_SHOW == false ]] then
+    return
+  fi
+
+  npm_pkg=$(npm version | grep { | sed "s/:.*$//" | sed "s/{ //" | sed "s/'//g" 2>/dev/null)
+  [[ "${npm_pkg}" == "npm" ]] && return
+
+  prompt_segment $BULLETTRAIN_NPM_PKG_BG $BULLETTRAIN_NPM_PKG_FG $BULLETTRAIN_NPM_PKG_PREFIX$npm_pkg$BULLETTRAIN_NPM_PKG_POSTFIX
+}
+
+
+
 prompt_time() {
   if [[ $BULLETTRAIN_TIME_SHOW == false ]] then
     return
@@ -424,6 +460,7 @@ build_prompt() {
   prompt_virtualenv
   prompt_nvm
   prompt_context
+  prompt_npm_pkg  
   prompt_dir
   prompt_git
   # prompt_hg
